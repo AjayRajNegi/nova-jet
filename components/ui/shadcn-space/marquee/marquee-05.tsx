@@ -1,114 +1,69 @@
-import { TrendingDown, TrendingUp } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import {
+	BaggageClaimIcon,
+	PlaneTakeoff,
+	ShipIcon,
+	TrainFront,
+	TruckIcon,
+	WarehouseIcon,
+} from "lucide-react";
+import type { ReactNode } from "react";
 import { Marquee } from "../animations/marquee";
 
 type Stock = {
-	symbol: string;
 	name: string;
-	price: number;
-	change: number;
 	logoClass: string;
+	icon?: ReactNode;
 };
 
 const stocks: Stock[] = [
 	{
-		symbol: "AAPL",
-		name: "Apple",
-		price: 227.48,
-		change: 1.24,
+		name: "Air",
 		logoClass: "bg-blue-500",
+		icon: <PlaneTakeoff />,
 	},
 	{
-		symbol: "MSFT",
-		name: "Microsoft",
-
-		price: 418.92,
-		change: -0.63,
+		name: "Ocean",
 		logoClass: "bg-sky-400",
+		icon: <ShipIcon />,
 	},
 	{
-		symbol: "NVDA",
-		name: "NVIDIA",
-		price: 131.76,
-		change: 3.41,
+		name: "Road",
 		logoClass: "bg-teal-400",
+		icon: <TruckIcon />,
 	},
 	{
-		symbol: "TSLA",
-		name: "Tesla",
-		price: 248.5,
-		change: -2.18,
+		name: "Rail",
 		logoClass: "bg-red-500",
+		icon: <TrainFront />,
 	},
 	{
-		symbol: "AMZN",
-		name: "Amazon",
-		price: 186.3,
-		change: 0.87,
+		name: "Warehousing",
 		logoClass: "bg-orange-400",
+		icon: <WarehouseIcon />,
 	},
 	{
-		symbol: "GOOGL",
-		name: "Alphabet",
-		price: 165.12,
-		change: 1.05,
+		name: "Customs",
 		logoClass: "bg-amber-300",
-	},
-	{
-		symbol: "META",
-		name: "Meta",
-		price: 512.74,
-		change: -1.32,
-		logoClass: "bg-blue-500",
-	},
-	{
-		symbol: "NFLX",
-		name: "Netflix",
-		price: 689.05,
-		change: 2.76,
-		logoClass: "bg-sky-400",
+		icon: <BaggageClaimIcon />,
 	},
 ];
 
-const StockItem = ({ symbol, name, price, change, logoClass }: Stock) => {
-	const isUp = change >= 0;
-	const TrendIcon = isUp ? TrendingUp : TrendingDown;
-
+const StockItem = ({ name, icon, logoClass }: Stock) => {
 	return (
 		<div className="flex items-center gap-3 px-6">
-			<div
-				className={cn(
-					"flex size-9 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white",
-					logoClass,
-				)}
-			>
-				{symbol.charAt(0)}
-			</div>
-			<p className="text-sm font-medium text-foreground">{name}</p>
-			<p className="text-sm text-muted-foreground">${price.toFixed(2)}</p>
-			<p
-				className={cn(
-					"flex items-center gap-1 text-sm font-medium",
-					isUp
-						? "text-emerald-600 dark:text-emerald-400"
-						: "text-red-600 dark:text-red-400",
-				)}
-			>
-				<TrendIcon className="size-4" aria-hidden="true" />
-				{isUp ? "+" : ""}
-				{change.toFixed(2)}%
-			</p>
+			{icon}
+			<p className="text-lg font-medium text-foreground">{name}</p>
+			{/* <p className="text-sm text-muted-foreground">${price.toFixed(2)}</p> */}
 		</div>
 	);
 };
 
 export default function TrendingStocksMarqueeDemo() {
 	return (
-		<div className="w-full overflow-hidden rounded-xl border border-border bg-card">
+		<div className="w-full overflow-hidden border border-border bg-card">
 			<Marquee pauseOnHover className="py-4 [--duration:30s] [--gap:0rem]">
 				{stocks.map((stock) => (
-					<StockItem key={stock.symbol} {...stock} />
+					<StockItem key={stock.name} {...stock} />
 				))}
 			</Marquee>
 		</div>
