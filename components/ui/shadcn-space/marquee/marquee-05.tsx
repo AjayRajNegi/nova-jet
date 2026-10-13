@@ -58,7 +58,7 @@ const StockItem = ({ name, icon, logoClass }: Stock) => {
 	);
 };
 
-export default function TrendingStocksMarqueeDemo() {
+export default function ServicesMarquee() {
 	return (
 		<div className="w-full overflow-hidden border border-border bg-card">
 			<Marquee pauseOnHover className="py-4 [--duration:30s] [--gap:0rem]">
