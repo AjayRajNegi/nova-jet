@@ -54,8 +54,8 @@ export default function IndustriesSection({ ind, setInd }: Props) {
 								className={
 									"cursor-pointer rounded-full px-5 py-[13px] text-[16px] font-medium transition-all duration-200 motion-reduce:transition-none " +
 									(ind === i
-										? "bg-ink text-white"
-										: "bg-white text-ink shadow-[inset_0_0_0_1.5px_#cdd6e6] hover:shadow-[inset_0_0_0_1.5px_#0a1f44]")
+										? "bg-foreground text-background"
+										: "bg-card text-card-foreground ring-[1.5px] ring-inset ring-border hover:ring-foreground")
 								}
 								onClick={() => setInd(i)}
 								type="button"
@@ -66,13 +66,15 @@ export default function IndustriesSection({ ind, setInd }: Props) {
 					</div>
 				</div>
 				<div
-					className="flex min-h-[340px] flex-col justify-end rounded-[28px] bg-mist p-12"
+					className="flex min-h-[340px] flex-col justify-end rounded-[28px] bg-muted p-12"
 					role="tabpanel"
 				>
-					<h3 className="mb-3.5 text-[clamp(30px,4vw,46px)] font-bold">
+					<h3 className="mb-3.5 text-[clamp(30px,4vw,46px)] font-bold text-foreground">
 						{industries[ind][0]}
 					</h3>
-					<p className="text-[19px] text-mute">{industries[ind][1]}</p>
+					<p className="text-[19px] text-muted-foreground">
+						{industries[ind][1]}
+					</p>
 				</div>
 			</div>
 		</section>

@@ -19,21 +19,21 @@ const steps = [
 
 export default function ProcessSection() {
 	return (
-		<section id="process" className={`${sec} bg-ink text-white`}>
+		<section id="process" className={`${sec} bg-foreground text-background`}>
 			<div className={wrap}>
 				<h2 className={h2}>From brief to proof of delivery.</h2>
-				<p className={`${sub} text-[#b4c1dc]`}>
+				<p className={`${sub} text-background/70`}>
 					You get a named operations contact, not a rotating ticket queue.
 					Exceptions are escalated the same day.
 				</p>
-				<div className="relative mt-[70px] grid grid-cols-5 before:absolute before:inset-x-0 before:top-[11px] before:border-t-2 before:border-dashed before:border-white/30 before:content-[''] max-[900px]:grid-cols-1 max-[900px]:gap-[34px] max-[900px]:before:hidden">
+				<div className="relative mt-[70px] grid grid-cols-5 before:absolute before:inset-x-0 before:top-[11px] before:border-t-2 before:border-dashed before:border-background/30 before:content-[''] max-[900px]:grid-cols-1 max-[900px]:gap-[34px] max-[900px]:before:hidden">
 					{steps.map(([t, d]) => (
 						<div
 							key={t}
-							className="relative pt-12 pr-5 before:absolute before:top-0 before:left-0 before:size-6 before:rounded-full before:bg-brand before:shadow-[0_0_0_6px_#0a1f44,0_0_0_8px_#ff4b33] before:content-['']"
+							className="relative pt-12 pr-5 before:absolute before:top-0 before:left-0 before:size-6 before:rounded-full before:bg-primary before:shadow-[0_0_0_6px_var(--foreground),0_0_0_8px_var(--chart-1)] before:content-['']"
 						>
 							<h3 className="mb-2.5 text-[26px] font-bold">{t}</h3>
-							<p className="text-[15px] text-[#b4c1dc]">{d}</p>
+							<p className="text-[15px] text-background/70">{d}</p>
 						</div>
 					))}
 				</div>

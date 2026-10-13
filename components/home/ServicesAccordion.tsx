@@ -54,14 +54,14 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 						door-to-door programme.
 					</p>
 				</div>
-				<div className="border-t-2 border-ink">
+				<div className="border-t-2 border-foreground">
 					{services.map(([t, d], i) => {
 						const on = svc === i;
 						return (
 							<div key={t}>
 								{/* biome-ignore lint/a11y/useButtonType: no */}
 								<button
-									className="flex w-full cursor-pointer items-center justify-between border-b border-[#cdd6e6] py-[26px] text-left font-display text-[clamp(24px,3vw,36px)] font-bold tracking-[-.02em]"
+									className="flex w-full cursor-pointer items-center justify-between border-b border-border py-[26px] text-left font-display text-[clamp(24px,3vw,36px)] font-bold tracking-[-.02em] text-foreground"
 									aria-expanded={on}
 									onClick={() => setSvc(on ? -1 : i)}
 								>
@@ -69,7 +69,9 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 									<span
 										className={
 											"grid size-9 place-items-center rounded-full transition-[transform,background-color] duration-[250ms] motion-reduce:transition-none" +
-											(on ? " rotate-45 bg-brand text-white" : " bg-mist")
+											(on
+												? " rotate-45 bg-primary text-primary-foreground"
+												: " bg-muted")
 										}
 									>
 										<svg
@@ -92,7 +94,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 								>
 									<p
 										className={
-											"max-w-[560px] overflow-hidden text-[18px] text-mute " +
+											"max-w-[560px] overflow-hidden text-[18px] text-muted-foreground " +
 											(on ? "pt-4 pb-7" : "")
 										}
 									>

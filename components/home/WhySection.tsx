@@ -30,10 +30,10 @@ export default function WhySection() {
 				className={`${wrap} grid grid-cols-2 gap-[70px] max-[900px]:grid-cols-1`}
 			>
 				<div>
-					<h2 className="text-[clamp(34px,5vw,60px)] font-extrabold">
+					<h2 className="text-[clamp(34px,5vw,60px)] font-extrabold text-foreground">
 						Why shippers stay with NovaJet.
 					</h2>
-					<p className="mt-9 max-w-[460px] border-l-4 border-brand pl-5 font-display text-[22px] font-medium">
+					<p className="mt-9 max-w-[460px] border-l-4 border-primary pl-5 font-display text-[22px] font-medium text-foreground">
 						We don&apos;t claim to be the largest house. We claim to be the one
 						that answers, documents and delivers.
 					</p>
@@ -42,13 +42,13 @@ export default function WhySection() {
 					{why.map(([t, d]) => (
 						<li
 							key={t}
-							className="grid grid-cols-[36px_1fr] gap-4 before:grid before:size-9 before:place-items-center before:rounded-[10px] before:bg-brand before:font-bold before:text-white before:content-['✓']"
+							className="grid grid-cols-[36px_1fr] gap-4 before:grid before:size-9 before:place-items-center before:rounded-[10px] before:bg-primary before:font-bold before:text-primary-foreground before:content-['✓']"
 						>
 							<div>
-								<b className="block font-display text-[24px] tracking-[-.02em]">
+								<b className="block font-display text-[24px] tracking-[-.02em] text-foreground">
 									{t}
 								</b>
-								<span className="text-mute">{d}</span>
+								<span className="text-muted-foreground">{d}</span>
 							</div>
 						</li>
 					))}
