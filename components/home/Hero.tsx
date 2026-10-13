@@ -1,150 +1,72 @@
-import { wrap } from "@/lib/constants";
-
-const routes = [
-	[
-		"M330 270 Q250 120 150 160",
-		150,
-		160,
-		"Europe",
-		"animate-[draw_2.2s_cubic-bezier(.6,0,.2,1)_.4s_forwards]",
-	],
-	[
-		"M330 270 Q230 400 190 400",
-		190,
-		400,
-		"Africa",
-		"animate-[draw_2.2s_cubic-bezier(.6,0,.2,1)_.7s_forwards]",
-	],
-	[
-		"M330 270 Q420 130 500 190",
-		500,
-		190,
-		"Far East",
-		"animate-[draw_2.2s_cubic-bezier(.6,0,.2,1)_1s_forwards]",
-	],
-	[
-		"M330 270 Q450 400 470 350",
-		470,
-		350,
-		"ASEAN",
-		"animate-[draw_2.2s_cubic-bezier(.6,0,.2,1)_1.3s_forwards]",
-	],
-	[
-		"M330 270 Q180 40 70 250",
-		70,
-		250,
-		"Americas",
-		"animate-[draw_2.2s_cubic-bezier(.6,0,.2,1)_1.6s_forwards]",
-	],
-];
+import Image from "next/image";
 
 export default function Hero() {
 	return (
-		<main id="top">
-			{/* hero */}
-			<div className="grid min-h-screen items-center bg-background bg-[radial-gradient(900px_600px_at_85%_40%,var(--accent),transparent_70%)] pt-[130px] pb-[70px]">
-				<div
-					className={`${wrap} grid grid-cols-[1.05fr_.95fr] items-center gap-6 max-[900px]:grid-cols-1`}
-				>
-					<div>
-						<h1 className="text-[clamp(48px,7.4vw,104px)] font-extrabold text-foreground">
-							Cargo that doesn&apos;t{" "}
-							<em className="text-primary not-italic">stall.</em>
-						</h1>
-						<p className="mt-[18px] max-w-[520px] text-[18px] text-muted-foreground">
-							NovaJet Global Logistics runs air, ocean, road, rail, warehousing
-							and customs from one desk in New Delhi, with one owner from
-							booking to proof of delivery.
-						</p>
-						<div className="mt-9 flex flex-wrap gap-3.5">
-							<a
-								className="inline-block cursor-pointer rounded-[14px] bg-primary px-8 py-[17px] text-[16px] font-bold text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none"
-								href="#quote"
-							>
-								Request a quotation
-							</a>
-							<a
-								className="inline-block cursor-pointer rounded-[14px] bg-transparent px-8 py-[17px] text-[16px] font-bold text-foreground ring-2 ring-inset ring-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none"
-								href="#services"
-							>
-								See services
-							</a>
-						</div>
-					</div>
-					<svg
-						className="h-auto w-full"
-						viewBox="0 0 600 520"
-						role="img"
-						aria-label="Shipping routes from New Delhi to Europe, Africa, the Far East, ASEAN and the Americas"
+		<main id="top" className="relative isolate min-h-screen overflow-hidden">
+			{/* Full-bleed background */}
+			<Image
+				src="/hero.jpg"
+				alt=""
+				fill
+				priority
+				sizes="100vw"
+				className="-z-20 object-cover object-bottom"
+			/>
+
+			{/* Edge vignette */}
+			<div
+				aria-hidden
+				className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_40%,transparent_40%,rgba(6,16,38,0.5)_100%)]"
+			/>
+			{/* Bottom scrim: this is what makes the text readable without a card */}
+			<div
+				aria-hidden
+				className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[75%] bg-gradient-to-t from-[#061026]/90 via-[#0a1e3c]/60 to-transparent"
+			/>
+
+			<div className="mx-auto flex min-h-screen max-w-[1100px] flex-col items-center justify-end px-5 pb-12 text-center md:pb-16">
+				<h1 className="text-balance text-[clamp(40px,6vw,76px)] font-semibold leading-[1.02] tracking-tight text-white [text-shadow:0_2px_24px_rgba(6,16,38,0.45)]">
+					Cargo That <span className="text-primary">Doesn&apos;t</span> Stall.
+				</h1>
+
+				<p className="mx-auto mt-5 max-w-[720px] text-balance text-[16px] leading-4 text-white/80 [text-shadow:0_1px_12px_rgba(6,16,38,0.5)] md:text-[18px]">
+					NovaJet Global Logistics runs air, ocean, road, rail, warehousing and
+					customs from one desk in New Delhi, with one owner from booking to
+					proof of delivery.
+				</p>
+
+				{/* CTA row: email pill + secondary button */}
+				<div className="mt-9 flex w-full flex-wrap items-center justify-center gap-3 md:mt-11">
+					<form
+						action="#quote"
+						method="get"
+						className="flex w-full max-w-[470px] items-center rounded-full border border-white/25 bg-white/12 p-1.5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl focus-within:border-white/60 focus-within:ring-2 focus-within:ring-white/40"
 					>
-						<defs>
-							<pattern
-								id="dots"
-								width="16"
-								height="16"
-								patternUnits="userSpaceOnUse"
-							>
-								<circle
-									cx="2"
-									cy="2"
-									r="1.6"
-									className="fill-foreground"
-									opacity=".25"
-								/>
-							</pattern>
-							<clipPath id="g">
-								<circle cx="300" cy="260" r="250" />
-							</clipPath>
-						</defs>
-						<circle cx="300" cy="260" r="250" className="fill-card" />
-						<rect
-							width="600"
-							height="520"
-							fill="url(#dots)"
-							clipPath="url(#g)"
+						<label htmlFor="hero-email" className="sr-only">
+							Work email
+						</label>
+						<input
+							id="hero-email"
+							name="email"
+							type="email"
+							required
+							placeholder="Enter your email"
+							className="min-w-0 flex-1 bg-transparent px-5 text-[16px] text-white placeholder:text-white/60 focus:outline-none"
 						/>
-						{routes.map(([d, x, y, name, anim]) => {
-							const cx = Number(x);
-							const cy = Number(y);
-							return (
-								<g key={name}>
-									<path
-										pathLength="1"
-										d={String(d)}
-										className={`fill-none stroke-primary stroke-[2.5] [stroke-dasharray:1] [stroke-dashoffset:1] [stroke-linecap:round] motion-reduce:animate-none motion-reduce:[stroke-dashoffset:0] ${anim}`}
-									/>
-									<circle
-										className="animate-[pop_.4s_2.2s_forwards] fill-foreground opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
-										cx={cx}
-										cy={cy}
-										r="6"
-									/>
-									<text
-										className="animate-[pop_.5s_2.4s_forwards] fill-foreground font-sans text-[13px] font-bold opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
-										x={cx - 20}
-										y={cy + 24}
-									>
-										{name}
-									</text>
-								</g>
-							);
-						})}
-						<circle
-							cx="330"
-							cy="270"
-							r="22"
-							className="fill-chart-1"
-							opacity=".2"
-						/>
-						<circle cx="330" cy="270" r="9" className="fill-chart-1" />
-						<text
-							x="344"
-							y="298"
-							className="fill-foreground font-sans text-[15px] font-extrabold"
+						<button
+							type="submit"
+							className="cursor-pointer rounded-full bg-primary px-6 py-3 text-[16px] font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none"
 						>
-							New Delhi
-						</text>
-					</svg>
+							Request a quotation
+						</button>
+					</form>
+
+					<a
+						href="#services"
+						className="cursor-pointer rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-[16px] font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/20 motion-reduce:transition-none"
+					>
+						See services
+					</a>
 				</div>
 			</div>
 		</main>
