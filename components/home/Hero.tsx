@@ -5,7 +5,7 @@ export default function Hero() {
 		<main id="top" className="relative isolate min-h-screen overflow-hidden">
 			{/* Full-bleed background */}
 			<Image
-				src="/hero.jpg"
+				src="/hero.webp"
 				alt=""
 				fill
 				priority

@@ -62,35 +62,35 @@ interface Props {
 }
 
 const media: { src: string; alt: string; icon: LucideIcon }[] = [
-	{ src: "/services/air.jpg", alt: "Cargo aircraft on approach", icon: Plane },
-	{ src: "/services/ocean.jpg", alt: "Container ship at sea", icon: Ship },
+	{ src: "/services/air.webp", alt: "Cargo aircraft on approach", icon: Plane },
+	{ src: "/services/ocean.webp", alt: "Container ship at sea", icon: Ship },
 	{
-		src: "/services/road.jpg",
+		src: "/services/road.webp",
 		alt: "Freight trucks on a highway",
 		icon: Truck,
 	},
 	{
-		src: "/services/customs.jpg",
+		src: "/services/customs.webp",
 		alt: "Custom clearances",
 		icon: TrainFront,
 	},
 	{
-		src: "/services/warehouse.jpg",
+		src: "/services/warehouse.webp",
 		alt: "Warehouse racking",
 		icon: Warehouse,
 	},
 	{
-		src: "/services/special.jpg",
+		src: "/services/special.webp",
 		alt: "Customs paperwork review",
 		icon: FileCheck2,
 	},
 	{
-		src: "/services/e-com.jpg",
+		src: "/services/e-com.webp",
 		alt: "e-commerce",
 		icon: ShoppingCartPlus,
 	},
 	{
-		src: "/services/supply.jpg",
+		src: "/services/supply.webp",
 		alt: "Supply chain",
 		icon: Container,
 	},
@@ -139,10 +139,10 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 
 					<div className="relative flex h-full min-h-[inherit] flex-col justify-between p-8 md:p-10">
 						<div>
-							<h2 className="text-balance font-display text-[clamp(30px,3.4vw,46px)] font-bold leading-[1.05] tracking-[-.02em] text-white">
+							<h2 className="text-balance font-display text-[clamp(30px,3.4vw,46px)] font-bold text-shadow-2xs tracking-tight text-white">
 								Every leg of the journey, one partner.
 							</h2>
-							<p className="mt-4 max-w-[440px] text-[16px] leading-relaxed text-white/80 md:text-[17px]">
+							<p className="mt-4 max-w-[440px] text-[16px] leading-5 tracking-tighter text-shadow-2xs text-white/80 md:text-[17px]">
 								Each service is scoped against transit time, cargo nature,
 								compliance risk and landed cost. Book one mode or a full
 								door-to-door programme.
@@ -166,7 +166,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 				<Accordion
 					value={svc >= 0 ? [String(svc)] : []}
 					onValueChange={(v) => setSvc(v.length ? Number(v[0]) : -1)}
-					className="border-t-2 border-foreground"
+					// className="border-t-2 border-foreground"
 				>
 					{services.map(([t, d], i) => {
 						const Icon = (media[i] ?? media[0]).icon;
@@ -174,20 +174,22 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 							<AccordionItem
 								key={t}
 								value={String(i)}
-								className="border-b border-border mt-5"
+								className="border-b border-border mb-5"
 							>
-								<AccordionTrigger className="group items-center gap-4 text-left font-display text-[clamp(22px,2.6vw,32px)] font-bold tracking-[-.02em] text-foreground/55 transition-colors hover:text-foreground hover:no-underline data-[state=open]:text-foreground [&>svg]:hidden">
-									<span className="flex items-center gap-4">
+								<AccordionTrigger className="group items-center gap-4 text-left font-display text-[clamp(22px,2.6vw,28px)] font-medium tracking-tighter text-foreground/55 transition-colors hover:text-foreground hover:no-underline data-[state=open]:text-foreground">
+									<span className="flex items-center gap-2">
 										<Icon
-											className="size-6 shrink-0 text-muted-foreground transition-colors group-data-[state=open]:text-primary"
+											className="size-6 shrink-0 text-foreground/55 group-hover:text-foreground transition-colors group-data-[state=open]:text-primary"
 											aria-hidden
 										/>
 										{t}
 									</span>
 								</AccordionTrigger>
-								<AccordionContent className="pb-5 pl-10 text-[18px] leading-relaxed text-muted-foreground">
-									<p className="max-w-[540px] tracking-tight leading-5">{d}</p>
-									<p className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-[15px] font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none hover:text-white">
+								<AccordionContent className="pb-5 pl-10 text-base leading-relaxed text-muted-foreground">
+									<p className="max-w-[540px] tracking-tight leading-4 text-shadow-xs">
+										{d}
+									</p>
+									<p className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none hover:text-white">
 										Get a quote for {t.toLowerCase()}
 									</p>
 								</AccordionContent>
