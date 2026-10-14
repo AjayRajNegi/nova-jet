@@ -39,7 +39,7 @@ export default function ProcessSection() {
 	return (
 		<section id="process" className={`${sec} bg-foreground text-background`}>
 			<div className={wrap}>
-				<h2 className={`${h2} tracking-tight font-medium`}>
+				<h2 className={`${h2} tracking-tight font-thin`}>
 					From brief to proof of delivery.
 				</h2>
 				<p className={`${sub} text-background/70 tracking-tight leading-5`}>
@@ -106,8 +106,8 @@ export default function ProcessSection() {
 									}}
 									transition={{ duration: 0.4 }}
 								>
-									<h3 className="mb-2.5 text-2xl">{t}</h3>
-									<p className="text-[15px] text-background/70 tracking-tight leading-4">
+									<h3 className="mb-2.5 text-2xl font-thin">{t}</h3>
+									<p className="text-[15px] text-background/70 tracking-tight font-thin leading-4">
 										{d}
 									</p>
 								</motion.div>

@@ -175,7 +175,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 								value={String(i)}
 								className="border-b border-border mb-5"
 							>
-								<AccordionTrigger className="group items-center gap-4 text-left font-display text-[clamp(22px,2.6vw,28px)] font-[400] tracking-tighter text-foreground/55 transition-colors hover:text-foreground hover:no-underline data-[state=open]:text-foreground">
+								<AccordionTrigger className="group items-center gap-4 text-left font-display text-[clamp(22px,2.6vw,28px)] font-thin text-shadow-2xs tracking-tighter text-foreground/55 transition-colors hover:text-foreground hover:no-underline data-[state=open]:text-foreground">
 									<span className="flex items-center gap-2">
 										<Icon
 											className="size-6 shrink-0 text-foreground/55 group-hover:text-foreground transition-colors group-data-[state=open]:text-primary"
@@ -185,7 +185,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 									</span>
 								</AccordionTrigger>
 								<AccordionContent className="pb-5 pl-10 text-base leading-relaxed text-muted-foreground">
-									<p className="max-w-[540px] tracking-tight leading-4 text-shadow-xs">
+									<p className="max-w-[540px] tracking-tight leading-4 text-shadow-2xs">
 										{d}
 									</p>
 									<p className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none hover:text-white">

@@ -42,7 +42,7 @@ export default function Header({ open, setOpen }: HeaderProps) {
 					))}
 				</nav>
 				<a
-					className="rounded-full bg-foreground px-[22px] py-3 text-[14px] font-bold text-background transition-colors duration-200 hover:bg-primary hover:text-primary-foreground motion-reduce:transition-none max-[900px]:hidden"
+					className="rounded-full bg-foreground px-[22px] py-3 text-[14px] font-thin text-background transition-colors duration-200 hover:bg-primary hover:text-primary-foreground motion-reduce:transition-none max-[900px]:hidden"
 					href="#quote"
 				>
 					Get a quote
