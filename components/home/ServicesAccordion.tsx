@@ -110,7 +110,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 			<div
 				className={`${wrap} grid grid-cols-[.9fr_1.1fr] gap-[50px] max-[900px]:grid-cols-1`}
 			>
-				{/* Left: image panel that follows the open service */}
+				{/* Left: image panel */}
 				<div className="sticky top-[120px] min-h-[560px] self-start overflow-hidden rounded-[32px] shadow-[0_30px_80px_-30px_rgba(8,24,52,0.6)] max-[900px]:static max-[900px]:min-h-[440px]">
 					{services.map(([t], i) => {
 						const m = media[i] ?? media[0];
@@ -139,7 +139,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 
 					<div className="relative flex h-full min-h-[inherit] flex-col justify-between p-8 md:p-10">
 						<div>
-							<h2 className="text-balance font-display text-[clamp(30px,3.4vw,46px)] font-bold text-shadow-2xs tracking-tight text-white">
+							<h2 className="text-balance font-display text-[clamp(30px,3.4vw,46px)] font-[300] text-shadow-2xs tracking-tight text-white">
 								Every leg of the journey, one partner.
 							</h2>
 							<p className="mt-4 max-w-[440px] text-[16px] leading-5 tracking-tighter text-shadow-2xs text-white/80 md:text-[17px]">
@@ -166,7 +166,6 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 				<Accordion
 					value={svc >= 0 ? [String(svc)] : []}
 					onValueChange={(v) => setSvc(v.length ? Number(v[0]) : -1)}
-					// className="border-t-2 border-foreground"
 				>
 					{services.map(([t, d], i) => {
 						const Icon = (media[i] ?? media[0]).icon;
@@ -176,7 +175,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 								value={String(i)}
 								className="border-b border-border mb-5"
 							>
-								<AccordionTrigger className="group items-center gap-4 text-left font-display text-[clamp(22px,2.6vw,28px)] font-medium tracking-tighter text-foreground/55 transition-colors hover:text-foreground hover:no-underline data-[state=open]:text-foreground">
+								<AccordionTrigger className="group items-center gap-4 text-left font-display text-[clamp(22px,2.6vw,28px)] font-[400] tracking-tighter text-foreground/55 transition-colors hover:text-foreground hover:no-underline data-[state=open]:text-foreground">
 									<span className="flex items-center gap-2">
 										<Icon
 											className="size-6 shrink-0 text-foreground/55 group-hover:text-foreground transition-colors group-data-[state=open]:text-primary"

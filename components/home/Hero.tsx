@@ -18,18 +18,17 @@ export default function Hero() {
 				aria-hidden
 				className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_40%,transparent_40%,rgba(6,16,38,0.5)_100%)]"
 			/>
-			{/* Bottom scrim: this is what makes the text readable without a card */}
 			<div
 				aria-hidden
 				className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[75%] bg-gradient-to-t from-[#061026]/90 via-[#0a1e3c]/60 to-transparent"
 			/>
 
 			<div className="mx-auto flex min-h-screen max-w-[1100px] flex-col items-center justify-end px-5 pb-12 text-center md:pb-16">
-				<h1 className="text-balance text-[clamp(40px,6vw,76px)] font-semibold leading-[1.02] tracking-tight text-white [text-shadow:0_2px_24px_rgba(6,16,38,0.45)]">
+				<h1 className="text-balance text-[clamp(40px,6vw,76px)] font-thin leading-[1.02] tracking-tight text-white [text-shadow:0_2px_24px_rgba(6,16,38,0.45)]">
 					Cargo That <span className="text-primary">Doesn&apos;t</span> Stall.
 				</h1>
 
-				<p className="mx-auto mt-5 max-w-[720px] text-balance text-[16px] leading-4 text-white/80 [text-shadow:0_1px_12px_rgba(6,16,38,0.5)] md:text-[18px]">
+				<p className="mx-auto mt-5 max-w-[720px] text-balance font-thin text-[16px] leading-4 text-white/80 [text-shadow:0_1px_12px_rgba(6,16,38,0.5)] md:text-[18px]">
 					NovaJet Global Logistics runs air, ocean, road, rail, warehousing and
 					customs from one desk in New Delhi, with one owner from booking to
 					proof of delivery.
