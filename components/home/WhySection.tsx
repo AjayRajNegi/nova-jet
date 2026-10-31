@@ -109,7 +109,7 @@ export default function Component() {
 	const [expandedItem, setExpandedItem] = useState<string[]>(["01"]);
 
 	return (
-		<section className="w-full mb-16">
+		<section className="w-full mb-16" id="why">
 			<div className="mx-auto max-w-5xl px-6 lg:px-0">
 				<div className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-20">
 					<div className="space-y-6">

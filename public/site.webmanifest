@@ -1,0 +1,27 @@
+{
+  "name": "NovaJet Global Logistics",
+  "short_name": "NovaJet",
+  "description": "End-to-end freight forwarding and supply chain solutions from New Delhi. Air, ocean, road, rail, customs, warehousing, and last-mile delivery.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1f44",
+  "theme_color": "#0a1f44",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "en-IN",
+  "dir": "ltr"
+}
