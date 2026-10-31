@@ -111,7 +111,7 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 				className={`${wrap} grid grid-cols-[.9fr_1.1fr] gap-[50px] max-[900px]:grid-cols-1`}
 			>
 				{/* Left: image panel */}
-				<div className="sticky top-[120px] min-h-[560px] self-start overflow-hidden rounded-[32px] shadow-[0_30px_80px_-30px_rgba(8,24,52,0.6)] max-[900px]:static max-[900px]:min-h-[440px]">
+				<div className="relative lg:sticky lg:top-[120px] min-h-[560px] self-start overflow-hidden rounded-[32px] shadow-[0_30px_80px_-30px_rgba(8,24,52,0.6)]">
 					{services.map(([t], i) => {
 						const m = media[i] ?? media[0];
 						return (

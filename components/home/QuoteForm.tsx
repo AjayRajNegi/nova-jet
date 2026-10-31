@@ -1,4 +1,8 @@
+"use client";
+
 import { wrap } from "@/lib/constants";
+import { useState, useTransition } from "react";
+import { sendQuoteForm } from "@/app/actions";
 
 interface Props {
 	sent: boolean;
@@ -6,6 +10,43 @@ interface Props {
 }
 
 export default function QuoteForm({ sent, setSent }: Props) {
+	const [pending, startTransition] = useTransition();
+	const [error, setError] = useState<string | null>(null);
+
+	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		setError(null);
+		const form = e.currentTarget;
+		const formData = new FormData(form);
+		const email = formData.get("email")?.toString();
+
+		if (!email || !email.includes("@")) {
+			setError("Please enter a valid email address.");
+			return;
+		}
+
+		startTransition(async () => {
+			const res = await sendQuoteForm(formData);
+			if (res.success) {
+				setSent(true);
+			} else if (res.error === "EMAIL_SERVICE_NOT_CONFIGURED") {
+				// Fallback: open mailto with all form data
+				const name = formData.get("name")?.toString() || "";
+				const mode = formData.get("mode")?.toString() || "";
+				const originDest = formData.get("originDest")?.toString() || "";
+
+				const subject = encodeURIComponent(`Quotation Request from ${email}`);
+				const body = encodeURIComponent(
+					`Hello Ajay,\n\nA new quotation request was submitted on NovaJet Global Logistics (Quote Form).\n\nName: ${name}\nEmail: ${email}\nMode of Transport: ${mode}\nOrigin & Destination: ${originDest}\n\nPlease follow up with this prospective client.`,
+				);
+				window.location.href = `mailto:ajayrajnegi1608@gmail.com?subject=${subject}&body=${body}`;
+				setSent(true);
+			} else {
+				setError(res.error || "Something went wrong. Please try again.");
+			}
+		});
+	}
+
 	return (
 		<section id="quote" className="pt-[30px] pb-[110px] max-[900px]:pb-[72px]">
 			<div className={wrap}>
@@ -26,28 +67,28 @@ export default function QuoteForm({ sent, setSent }: Props) {
 						</div>
 					) : (
 						<form
+							onSubmit={handleSubmit}
 							className="grid gap-3.5"
-							onSubmit={(e) => {
-								e.preventDefault();
-								setSent(true);
-							}}
 						>
 							<input
+								name="name"
 								required
 								className="w-full rounded-[14px] bg-card px-5 py-3 text-sm font-medium text-card-foreground outline-0"
 								placeholder="Your name"
 								aria-label="Your name"
 							/>
-							<div className="flex ">
+							<div className="flex gap-2">
 								<input
+									name="email"
 									required
 									type="email"
-									className="w-full rounded-l-md border-r bg-card px-5 py-3 text-sm font-medium text-card-foreground outline-0"
+									className="flex-1 w-full rounded-l-md border-r bg-card px-5 py-3 text-sm font-medium text-card-foreground outline-0"
 									placeholder="Work email"
 									aria-label="Work email"
 								/>
 								<select
-									className="w-full rounded-r-md bg-card px-5 py-3 text-sm font-medium text-card-foreground outline-0"
+									name="mode"
+									className="flex-1 w-full rounded-r-md bg-card px-5 py-3 text-sm font-medium text-card-foreground outline-0"
 									aria-label="Mode"
 									defaultValue=""
 								>
@@ -62,18 +103,21 @@ export default function QuoteForm({ sent, setSent }: Props) {
 								</select>
 							</div>
 							<input
+								name="originDest"
 								className="w-full rounded-md bg-card px-5 py-3 text-sm font-medium text-card-foreground outline-0"
 								placeholder="Origin and destination"
 								aria-label="Origin and destination"
 							/>
 							<button
-								className="inline-block cursor-pointer rounded-md bg-foreground px-8 py-3 text-sm text-background transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none"
 								type="submit"
+								disabled={pending}
+								className="inline-block cursor-pointer rounded-md bg-foreground px-8 py-3 text-sm text-background transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none disabled:opacity-50"
 							>
-								Send request
+								{pending ? "Sending..." : "Send request"}
 							</button>
 						</form>
 					)}
+					{error && <p className="mt-3 text-sm text-red-300">{error}</p>}
 				</div>
 			</div>
 		</section>

@@ -8,19 +8,21 @@ interface HeaderProps {
 export default function Header({ open, setOpen }: HeaderProps) {
 	return (
 		<header className="fixed inset-x-0 top-[18px] z-30 flex justify-center px-4">
-			<div className="relative flex w-[min(960px,100%)] items-center justify-between gap-7 rounded-full py-2.5 pr-3 pl-6 shadow-[0_10px_40px_color-mix(in_oklab,var(--foreground)_12%,transparent)] overflow-clip backdrop-blur-3xl bg-white/12 border border-white/20">
-				<div className="h-24 w-2 bg-primary/50 absolute left-[20%] rotate-30" />
-				<div className="h-24 w-2 bg-primary/50 absolute left-[22%] rotate-30" />
+			<div className="relative flex w-[min(960px,100%)] items-center justify-between gap-7 rounded-full py-2.5 pr-3 pl-6 shadow-[0_10px_40px_color-mix(in_oklab,var(--foreground)_12%,transparent)] backdrop-blur-3xl bg-white/12 border border-white/20">
+				<div className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+					<div className="h-24 w-2 bg-primary/50 absolute left-[20%] rotate-30" />
+					<div className="h-24 w-2 bg-primary/50 absolute left-[22%] rotate-30" />
 
-				<div className="h-24 w-2 bg-primary/50 absolute right-[20%] rotate-30" />
-				<div className="h-24 w-2 bg-primary/50 absolute right-[22%] rotate-30" />
+					<div className="h-24 w-2 bg-primary/50 absolute right-[20%] rotate-30" />
+					<div className="h-24 w-2 bg-primary/50 absolute right-[22%] rotate-30" />
+				</div>
 
 				<Logo />
 				<nav
 					className={
 						"flex gap-[26px] text-[15px] font-medium font-display text-foreground " +
 						(open
-							? "max-[900px]:absolute max-[900px]:inset-x-4 max-[900px]:top-[70px] max-[900px]:flex-col max-[900px]:rounded-3xl max-[900px]:bg-background max-[900px]:p-6 max-[900px]:shadow-[0_10px_40px_color-mix(in_oklab,var(--foreground)_15%,transparent)]"
+							? "max-[900px]:absolute max-[900px]:inset-x-4 max-[900px]:top-[70px] max-[900px]:flex-col max-[900px]:rounded-3xl max-[900px]:bg-background max-[900px]:p-6 max-[900px]:shadow-[0_10px_40px_color-mix(in_oklab,var(--foreground)_15%,transparent)] max-[900px]:z-50"
 							: "max-[900px]:hidden")
 					}
 					aria-label="Primary"

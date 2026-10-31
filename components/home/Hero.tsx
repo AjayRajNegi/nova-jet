@@ -1,6 +1,43 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useTransition } from "react";
+import { sendHeroQuote } from "@/app/actions";
 
 export default function Hero() {
+	const [pending, startTransition] = useTransition();
+	const [submitted, setSubmitted] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+
+	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		setError(null);
+		const form = e.currentTarget;
+		const formData = new FormData(form);
+		const email = formData.get("email")?.toString();
+
+		if (!email || !email.includes("@")) {
+			setError("Please enter a valid email address.");
+			return;
+		}
+
+		// Try server action first (works when RESEND_API_KEY is configured)
+		startTransition(async () => {
+			const res = await sendHeroQuote(formData);
+			if (res.success) {
+				setSubmitted(true);
+			} else {
+				// Fallback: open mailto link so user can send manually
+				const subject = encodeURIComponent(`Quotation Request from ${email}`);
+				const body = encodeURIComponent(
+					`Hello Ajay,\n\nA new quotation request was submitted on NovaJet Global Logistics.\n\nRequester Email: ${email}\n\nPlease follow up with this prospective client.`,
+				);
+				window.location.href = `mailto:ajayrajnegi1608@gmail.com?subject=${subject}&body=${body}`;
+				setSubmitted(true); // show thank you after mailto opens
+			}
+		});
+	}
+
 	return (
 		<main id="top" className="relative isolate min-h-screen overflow-hidden">
 			{/* Full-bleed background */}
@@ -36,29 +73,35 @@ export default function Hero() {
 
 				{/* CTA row: email pill + secondary button */}
 				<div className="mt-9 flex w-full flex-wrap items-center justify-center gap-3 md:mt-11">
-					<form
-						action="#quote"
-						method="get"
-						className="flex w-full max-w-[470px] items-center rounded-full border border-white/25 bg-white/12 p-1.5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl focus-within:border-white/60 focus-within:ring-2 focus-within:ring-white/40"
-					>
-						<label htmlFor="hero-email" className="sr-only">
-							Work email
-						</label>
-						<input
-							id="hero-email"
-							name="email"
-							type="email"
-							required
-							placeholder="Enter your email"
-							className="min-w-0 flex-1 bg-transparent px-5 text-[16px] text-white placeholder:text-white/60 focus:outline-none"
-						/>
-						<button
-							type="submit"
-							className="cursor-pointer rounded-full bg-primary px-6 py-3 text-[16px] font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none"
+					{submitted ? (
+						<div className="rounded-full border border-white/25 bg-white/12 px-8 py-4 text-[16px] font-medium text-white shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+							Thank you! Your quotation request has been sent.
+						</div>
+					) : (
+						<form
+							onSubmit={handleSubmit}
+							className="flex w-full max-w-[470px] items-center rounded-full border border-white/25 bg-white/12 p-1.5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl focus-within:border-white/60 focus-within:ring-2 focus-within:ring-white/40"
 						>
-							Request a quotation
-						</button>
-					</form>
+							<label htmlFor="hero-email" className="sr-only">
+								Work email
+							</label>
+							<input
+								id="hero-email"
+								name="email"
+								type="email"
+								required
+								placeholder="Enter your email"
+								className="min-w-0 flex-1 bg-transparent px-5 text-[16px] text-white placeholder:text-white/60 focus:outline-none"
+							/>
+							<button
+								type="submit"
+								disabled={pending}
+								className="cursor-pointer rounded-full bg-primary px-6 py-3 text-[16px] font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none disabled:opacity-50"
+							>
+								{pending ? "Sending..." : "Request a quotation"}
+							</button>
+						</form>
+					)}
 
 					<a
 						href="#services"
@@ -67,6 +110,7 @@ export default function Hero() {
 						See services
 					</a>
 				</div>
+				{error && <p className="mt-3 text-sm text-red-300">{error}</p>}
 			</div>
 		</main>
 	);
