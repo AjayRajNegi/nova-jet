@@ -1,8 +1,8 @@
 "use client";
 
-import { wrap } from "@/lib/constants";
 import { useState, useTransition } from "react";
 import { sendQuoteForm } from "@/app/actions";
+import { wrap } from "@/lib/constants";
 
 interface Props {
 	sent: boolean;
@@ -37,9 +37,9 @@ export default function QuoteForm({ sent, setSent }: Props) {
 
 				const subject = encodeURIComponent(`Quotation Request from ${email}`);
 				const body = encodeURIComponent(
-					`Hello Ajay,\n\nA new quotation request was submitted on NovaJet Global Logistics (Quote Form).\n\nName: ${name}\nEmail: ${email}\nMode of Transport: ${mode}\nOrigin & Destination: ${originDest}\n\nPlease follow up with this prospective client.`,
+					`Hello Nitesh,\n\nA new quotation request was submitted on NovaJet Global Logistics (Quote Form).\n\nName: ${name}\nEmail: ${email}\nMode of Transport: ${mode}\nOrigin & Destination: ${originDest}\n\nPlease follow up with this prospective client.`,
 				);
-				window.location.href = `mailto:ajayrajnegi1608@gmail.com?subject=${subject}&body=${body}`;
+				window.location.href = `mailto:sales@novajet-global.com?subject=${subject}&body=${body}`;
 				setSent(true);
 			} else {
 				setError(res.error || "Something went wrong. Please try again.");
@@ -66,10 +66,7 @@ export default function QuoteForm({ sent, setSent }: Props) {
 							Thanks. Our operations desk will reply with a quotation shortly.
 						</div>
 					) : (
-						<form
-							onSubmit={handleSubmit}
-							className="grid gap-3.5"
-						>
+						<form onSubmit={handleSubmit} className="grid gap-3.5">
 							<input
 								name="name"
 								required

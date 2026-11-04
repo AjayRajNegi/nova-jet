@@ -7,9 +7,9 @@ export async function sendHeroQuote(formData: FormData) {
 	}
 
 	if (process.env.RESEND_API_KEY) {
-		const recipient = "ajayrajnegi1608@gmail.com";
+		const recipient = "sales@novajet-global.com";
 		const subject = `New Quotation Request from ${email}`;
-		const text = `Hello Ajay,\n\nA new quotation request was submitted on NovaJet Global Logistics (Hero section).\n\nRequester Email: ${email}\n\nPlease follow up with this prospective client.\n\nBest regards,\nNovaJet System`;
+		const text = `Hello Nitesh,\n\nA new quotation request was submitted on NovaJet Global Logistics (Hero section).\n\nRequester Email: ${email}\n\nPlease follow up with this prospective client.\n\nBest regards,\nNovaJet System`;
 
 		try {
 			const res = await fetch("https://api.resend.com/emails", {
@@ -52,9 +52,9 @@ export async function sendQuoteForm(formData: FormData) {
 	}
 
 	if (process.env.RESEND_API_KEY) {
-		const recipient = "ajayrajnegi1608@gmail.com";
+		const recipient = "sales@novajet-global.com";
 		const subject = `New Quotation Request from ${email}`;
-		const text = `Hello Ajay,\n\nA new quotation request was submitted on NovaJet Global Logistics (Quote Form).\n\nName: ${name}\nEmail: ${email}\nMode of Transport: ${mode}\nOrigin & Destination: ${originDest}\n\nPlease follow up with this prospective client.\n\nBest regards,\nNovaJet System`;
+		const text = `Hello Nitesh,\n\nA new quotation request was submitted on NovaJet Global Logistics (Quote Form).\n\nName: ${name}\nEmail: ${email}\nMode of Transport: ${mode}\nOrigin & Destination: ${originDest}\n\nPlease follow up with this prospective client.\n\nBest regards,\nNovaJet System`;
 
 		try {
 			const res = await fetch("https://api.resend.com/emails", {
