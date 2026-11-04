@@ -17,10 +17,10 @@ export default function Footer() {
 							fast, accountable, and global in outlook.
 						</p>
 						<a
-							href="mailto:info@novajetlogistics.com"
+							href="mailto:sales@novajet-global.com"
 							className="text-lg font-medium border-b-2 border-zinc-900 pb-1 hover:text-primary hover:border-primary transition-all"
 						>
-							info@novajetlogistics.com
+							sales@novajet-global.com
 						</a>
 					</div>
 
