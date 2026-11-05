@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { sendQuoteForm } from "@/app/actions";
 import { wrap } from "@/lib/constants";
+import { openQuoteMailDraft } from "@/lib/helper/open-mail-draft";
 
 interface Props {
 	sent: boolean;
@@ -16,11 +17,14 @@ export default function QuoteForm({ sent, setSent }: Props) {
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		setError(null);
-		const form = e.currentTarget;
-		const formData = new FormData(form);
-		const email = formData.get("email")?.toString();
 
-		if (!email || !email.includes("@")) {
+		const formData = new FormData(e.currentTarget);
+		const email = formData.get("email")?.toString().trim();
+		const name = formData.get("name")?.toString().trim() || "";
+		const mode = formData.get("mode")?.toString().trim() || "";
+		const originDest = formData.get("originDest")?.toString().trim() || "";
+
+		if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
 			setError("Please enter a valid email address.");
 			return;
 		}
@@ -30,16 +34,7 @@ export default function QuoteForm({ sent, setSent }: Props) {
 			if (res.success) {
 				setSent(true);
 			} else if (res.error === "EMAIL_SERVICE_NOT_CONFIGURED") {
-				// Fallback: open mailto with all form data
-				const name = formData.get("name")?.toString() || "";
-				const mode = formData.get("mode")?.toString() || "";
-				const originDest = formData.get("originDest")?.toString() || "";
-
-				const subject = encodeURIComponent(`Quotation Request from ${email}`);
-				const body = encodeURIComponent(
-					`Hello Nitesh,\n\nA new quotation request was submitted on NovaJet Global Logistics (Quote Form).\n\nName: ${name}\nEmail: ${email}\nMode of Transport: ${mode}\nOrigin & Destination: ${originDest}\n\nPlease follow up with this prospective client.`,
-				);
-				window.location.href = `mailto:sales@novajet-global.com?subject=${subject}&body=${body}`;
+				openQuoteMailDraft(name, mode, originDest);
 				setSent(true);
 			} else {
 				setError(res.error || "Something went wrong. Please try again.");

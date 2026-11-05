@@ -12,7 +12,8 @@ import {
 	Warehouse,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
+import { sendHeroQuote } from "@/app/actions";
 import {
 	Accordion,
 	AccordionContent,
@@ -20,6 +21,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion";
 import { sec, wrap } from "@/lib/constants";
+import { openMailDraft } from "@/lib/helper/open-mail-draft";
 
 const services = [
 	[
@@ -98,12 +100,17 @@ const media: { src: string; alt: string; icon: LucideIcon }[] = [
 
 export default function ServicesAccordion({ svc, setSvc }: Props) {
 	const [shown, setShown] = useState(0);
+
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/set-state-in-effect
 		if (svc >= 0) setShown(svc);
 	}, [svc]);
 
 	const current = services[shown];
+
+	function handleSubmit() {
+		openMailDraft();
+	}
 
 	return (
 		<section id="services" className={sec}>
@@ -188,9 +195,13 @@ export default function ServicesAccordion({ svc, setSvc }: Props) {
 									<p className="max-w-[540px] tracking-tight leading-4 text-shadow-2xs">
 										{d}
 									</p>
-									<p className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none hover:text-white">
+									<button
+										onClick={handleSubmit}
+										type="button"
+										className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none hover:text-white"
+									>
 										Get a quote for {t.toLowerCase()}
-									</p>
+									</button>
 								</AccordionContent>
 							</AccordionItem>
 						);

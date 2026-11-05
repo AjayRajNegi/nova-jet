@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useState, useTransition } from "react";
 import { sendHeroQuote } from "@/app/actions";
+import { openMailDraft } from "@/lib/helper/open-mail-draft";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 export default function Hero() {
 	const [pending, startTransition] = useTransition();
@@ -12,29 +15,27 @@ export default function Hero() {
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		setError(null);
-		const form = e.currentTarget;
-		const formData = new FormData(form);
-		const email = formData.get("email")?.toString();
 
-		if (!email || !email.includes("@")) {
+		const formData = new FormData(e.currentTarget);
+		const email = formData.get("email")?.toString().trim();
+		const name = formData.get("name")?.toString().trim();
+		const phone = formData.get("phone")?.toString().trim();
+
+		if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
 			setError("Please enter a valid email address.");
 			return;
 		}
 
-		// Try server action first (works when RESEND_API_KEY is configured)
 		startTransition(async () => {
-			const res = await sendHeroQuote(formData);
-			if (res.success) {
-				setSubmitted(true);
-			} else {
-				// Fallback: open mailto link so user can send manually
-				const subject = encodeURIComponent(`Quotation Request from ${email}`);
-				const body = encodeURIComponent(
-					`Hello Nitesh,\n\nA new quotation request was submitted on NovaJet Global Logistics.\n\nRequester Email: ${email}\n\nPlease follow up with this prospective client.`,
-				);
-				window.location.href = `mailto:sales@novajet-global.com?subject=${subject}&body=${body}`;
-				setSubmitted(true); // show thank you after mailto opens
-			}
+			try {
+				const res = await sendHeroQuote(formData);
+				if (res.success) {
+					setSubmitted(true);
+					return;
+				}
+			} catch {}
+			openMailDraft(name, phone);
+			setSubmitted(true);
 		});
 	}
 
@@ -80,26 +81,28 @@ export default function Hero() {
 					) : (
 						<form
 							onSubmit={handleSubmit}
-							className="flex w-full max-w-[470px] items-center rounded-full border border-white/25 bg-white/12 p-1.5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl focus-within:border-white/60 focus-within:ring-2 focus-within:ring-white/40"
+							className="flex w-full max-w-[470px] flex-col gap-2 rounded-2xl border border-white/25 bg-white/12 p-2 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl focus-within:border-white/60 focus-within:ring-2 focus-within:ring-white/40 sm:flex-row sm:items-center sm:rounded-full sm:p-1.5"
 						>
 							<label htmlFor="hero-email" className="sr-only">
 								Work email
 							</label>
-							<input
+
+							<Input
 								id="hero-email"
 								name="email"
 								type="email"
 								required
 								placeholder="Enter your email"
-								className="min-w-0 flex-1 bg-transparent px-5 text-[16px] text-white placeholder:text-white/60 focus:outline-none"
+								className="h-11 min-w-0 text-center lg:text-left flex-1 border-0 bg-transparent rounded-full px-4 text-base text-white shadow-none placeholder:text-white/60 focus-visible:ring-0 focus-visible:ring-offset-0"
 							/>
-							<button
+
+							<Button
 								type="submit"
 								disabled={pending}
-								className="cursor-pointer rounded-full bg-primary px-6 py-3 text-[16px] font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none disabled:opacity-50"
+								className="h-11 w-full shrink-0 cursor-pointer rounded-full px-5 text-sm font-medium transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none sm:w-auto sm:px-5 sm:text-base"
 							>
 								{pending ? "Sending..." : "Request a quotation"}
-							</button>
+							</Button>
 						</form>
 					)}
 

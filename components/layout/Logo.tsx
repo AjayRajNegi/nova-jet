@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Logo() {
@@ -9,6 +10,7 @@ export default function Logo() {
 			{/* <i className="grid size-[26px] place-items-center rounded-[50%_50%_50%_4px] bg-foreground text-[12px] text-background not-italic">
 				NJ
 			</i> */}
+			<Image src="/nova-jet.png" height={50} width={50} alt="logo" />
 			<span>
 				Nova<b className="text-primary font-thin">Jet</b>
 			</span>

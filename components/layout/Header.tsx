@@ -9,14 +9,6 @@ export default function Header({ open, setOpen }: HeaderProps) {
 	return (
 		<header className="fixed inset-x-0 top-[18px] z-30 flex justify-center px-4">
 			<div className="relative flex w-[min(960px,100%)] items-center justify-between gap-7 rounded-full py-2.5 pr-3 pl-6 shadow-[0_10px_40px_color-mix(in_oklab,var(--foreground)_12%,transparent)] backdrop-blur-3xl bg-white/12 border border-white/20">
-				<div className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
-					<div className="h-24 w-2 bg-primary/50 absolute left-[20%] rotate-30" />
-					<div className="h-24 w-2 bg-primary/50 absolute left-[22%] rotate-30" />
-
-					<div className="h-24 w-2 bg-primary/50 absolute right-[20%] rotate-30" />
-					<div className="h-24 w-2 bg-primary/50 absolute right-[22%] rotate-30" />
-				</div>
-
 				<Logo />
 				<nav
 					className={

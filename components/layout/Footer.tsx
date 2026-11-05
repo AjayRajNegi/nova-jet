@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import Logo from "./Logo";
 
 export default function Footer() {
 	return (
@@ -7,10 +7,18 @@ export default function Footer() {
 			className="w-full bg-white text-zinc-900 overflow-hidden border-t border-zinc-200"
 			role="contentinfo"
 		>
-			<div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8 flex flex-col items-center">
+			<div className="max-w-7xl mx-auto px-4 py-10 sm:px-6  flex flex-col items-center">
+				<Image
+					src="/footer.jpeg"
+					height={250}
+					width={250}
+					alt="logo"
+					className="mb-5 md:mb-0"
+				/>
+
 				<div className="w-full flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
 					<div className="max-w-md">
-						<Logo />
+						{/* <Logo /> */}
 						<p className="text-zinc-600 mb-6 leading-relaxed">
 							NovaJet Global Logistics is a New Delhi-based freight and
 							supply-chain company built to move cargo with clarity and pace —
@@ -83,19 +91,17 @@ export default function Footer() {
 						NovaJet
 					</h1>
 					<div className="flex justify-between items-end border-t backdrop-blur border-zinc-200 pt-8 pb-6 relative z-10">
-						<span className="text-xs font-medium uppercase tracking-widest text-zinc-400">
+						<span className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-zinc-400">
 							© {new Date().getFullYear()} NovaJet Global Logistics
 						</span>
-						<div className="flex gap-8">
-							<span className="text-xs text-zinc-400">Privacy Policy</span>
-							<a
-								type="button"
-								href="#top"
-								className="text-xs font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors"
-							>
-								Back to top ↑
-							</a>
-						</div>
+
+						<a
+							type="button"
+							href="#top"
+							className="text-xs font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors"
+						>
+							Back to top ↑
+						</a>
 					</div>
 				</div>
 			</div>
